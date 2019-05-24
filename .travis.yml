@@ -1,16 +1,16 @@
+env:
+  global:
+    - image_name=springboot
+    - docker_hub=bucinkocloud
 
 language: java
-
-
 
 services:
   - docker
 sudo: false
 script: mvn clean compile package
 
-env:
-  - image_name=springboot
-  - docker_hub=bucinkocloud
+
 after_script:
   - docker build -t $docker_hub/$image_name .
   - echo "$DOCKER_PASSWORD" | docker login -u bucinkocloud --password-stdin
