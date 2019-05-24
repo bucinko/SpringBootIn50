@@ -1,0 +1,12 @@
+
+language: java
+
+services:
+  - docker
+sudo: false
+script: mvn clean compile package
+
+after_install:
+  - docker build -t bucinkocloud/springboot .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push bucinkocloud/tasklist:latest
