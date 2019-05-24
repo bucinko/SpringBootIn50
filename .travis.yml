@@ -10,5 +10,5 @@ script: mvn clean compile package
 
 after_script:
   - docker build -t bucinkocloud/springboot .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u bucinkocloud --password-stdin
   - docker push bucinkocloud/tasklist:latest
