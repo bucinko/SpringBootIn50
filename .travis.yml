@@ -1,5 +1,8 @@
 
 language: java
+env:
+  - image_name=springboot
+  - docker_hub=bucinkocloud
 
 
 services:
@@ -9,6 +12,6 @@ script: mvn clean compile package
 
 
 after_script:
-  - docker build -t bucinkocloud/springboot .
+  - docker build -t $docker_hub/$image_name .
   - echo "$DOCKER_PASSWORD" | docker login -u bucinkocloud --password-stdin
-  - docker push bucinkocloud/tasklist:latest
+  - docker push $docker_hub/$image_name:latest
