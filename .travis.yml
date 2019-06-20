@@ -17,6 +17,7 @@ install:
 script: mvn clean compile package
 
 after_success:
+    - pip install 'requests[security]'
     - pip install urllib3
     - pip install --upgrade --user pip
     - which pip
