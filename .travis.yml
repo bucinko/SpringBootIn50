@@ -18,7 +18,7 @@ script: mvn clean compile package
 
 after_success:
     - docker --version  # document the version travis is using
-    - pip3 install awscli --upgrade --user  # install aws cli w/o sudo
+    - pip install --user awscli   # install aws cli w/o sudo
     - export PATH=$PATH:$HOME/.local/bin # put aws in the path
     - eval $(aws ecr get-login --region eu-west-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
     - docker build -t $image_name .
