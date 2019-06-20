@@ -17,10 +17,7 @@ install:
 script: mvn clean compile package
 
 after_success:
-    - pip install pyOpenSSL ndg-httpsclient pyasn1
-    - pip install 'requests[security]'
-    - pip install urllib3
-    - pip install --upgrade --user pip
+    - pip install --upgrade pip
     - which pip
     - docker --version  # document the version travis is using
     - pip install --user awscli   # install aws cli w/o sudo
