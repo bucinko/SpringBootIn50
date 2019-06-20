@@ -22,6 +22,6 @@ after_success:
     - export PATH=$PATH:$HOME/.local/bin # put aws in the path
     - eval $(aws ecr get-login --region eu-west-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
     - docker build -t $image_name .
-    - docker tag $image_name:latest $ecr_account.dkr.ecr.us-east-1.amazonaws.com/$image_name:latest
+    - docker tag $image_name:latest $ecr_account.dkr.ecr.eu-west-1.amazonaws.com/$image_name:latest
     - docker push $ecr_account.dkr.ecr.eu-west-1.amazonaws.com/$image_name:latest
 
