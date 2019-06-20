@@ -16,12 +16,13 @@ install:
 
 script: mvn clean compile package
 
-after_success:
-    - pip install --upgrade pip
-    - which pip
-    - docker --version  # document the version travis is using
-    - pip install --user awscli   # install aws cli w/o sudo
-    - export PATH=$PATH:$HOME/.local/bin # put aws in the path
+
+
+after_script:
+    - 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
+    - 'unzip awscli-bundle.zip'
+    - './awscli-bundle/install -b ~/bin/aws'
+    - 'export PATH=~/bin:$PATH'
     - eval $(aws ecr get-login --region eu-west-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
     - docker build -t $image_name .
     - docker tag $image_name:latest $ecr_account.dkr.ecr.eu-west-1.amazonaws.com/$image_name:latest
